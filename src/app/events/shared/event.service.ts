@@ -1,9 +1,12 @@
 import { Injectable } from "@angular/core"
+import { Subject } from "rxjs";
 
 @Injectable() //Mark as injectable is a good practice. Is required when inject a service which also inject other services.
 export class EventService {
     getEvents(){
-        return EVENTS
+      let subject = new Subject();
+      setTimeout(() => {subject.next(EVENTS); subject.complete();},100);
+      return subject;
     }
 
     getEvent(id: number){
